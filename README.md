@@ -35,7 +35,7 @@ Layer 3:       D
 
 ## Sample usage
 
-```
+```go
 import (
 	"github.com/quipo/dependencysolver"
 )
