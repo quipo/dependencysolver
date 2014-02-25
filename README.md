@@ -20,13 +20,13 @@ Dependency tree:
 
 Resulting execution layers:
 
-------------------------
+---------------------
 Layer 1:       A
-------------------------
+---------------------
 Layer 2:     B   C
-------------------------
+---------------------
 Layer 3:       D
-------------------------
+---------------------
 ```
 
 ## Installation
@@ -41,7 +41,7 @@ import (
 )
 
 type Operation struct {
-	ID string,
+	ID   string,
 	Deps []string,
 	// some other properties of the operation	
 }
