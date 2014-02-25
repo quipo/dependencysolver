@@ -1,27 +1,30 @@
 package dependencysolver
 
+// Entry is a struct containing information about a task, its ID and the dependency list
 type Entry struct {
-	Id   string
+	ID   string
 	Deps []string
 }
 
-// verify there are no cycles in the dependency graph
+// HasCircularDependency returns false if there are no cycles in the dependency graph
 func HasCircularDependency(entries []Entry) bool {
 	return (nil == LayeredTopologicalSort(entries))
 }
 
+// LayeredTopologicalSort returns a list of layers of entries,
+// the entries within each layer can be executed in parallel
 func LayeredTopologicalSort(entries []Entry) (layers [][]string) {
 	// build the dependencies graph
 	dependenciesToFrom := make(map[string]map[string]bool)
 	dependenciesFromTo := make(map[string]map[string]bool)
 	for _, entry := range entries {
-		dependenciesToFrom[entry.Id] = make(map[string]bool)
+		dependenciesToFrom[entry.ID] = make(map[string]bool)
 		for _, dep := range entry.Deps {
-			dependenciesToFrom[entry.Id][dep] = true
+			dependenciesToFrom[entry.ID][dep] = true
 			if _, ok := dependenciesFromTo[dep]; !ok {
 				dependenciesFromTo[dep] = make(map[string]bool)
 			}
-			dependenciesFromTo[dep][entry.Id] = true
+			dependenciesFromTo[dep][entry.ID] = true
 		}
 	}
 
