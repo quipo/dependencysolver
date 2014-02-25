@@ -41,7 +41,7 @@ import (
 )
 
 type Operation struct {
-	Id string,
+	ID string,
 	Deps []string,
 	// some other properties of the operation	
 }
@@ -50,7 +50,7 @@ type Operation struct {
 func SortByDependency(operations []Operation) (layers [][]string) {
 	entries := make([]dependencysolver.Entry, 0)
 	for _, op := range operations {
-		entries = append(entries, dependencysolver.Entry{Id: op.Id, Deps: op.Deps})
+		entries = append(entries, dependencysolver.Entry{ID: op.ID, Deps: op.Deps})
 	}
 	return dependencysolver.LayeredTopologicalSort(entries)
 }
