@@ -1,3 +1,9 @@
+// Layer-based scheduling algorithm for parallel tasks with dependencies.
+//
+// Given a list of entries (each with its own dependency list),
+// it can sort the entries in layers of execution,
+// where all entries in the same layer can be executed in parallel,
+// and have no other dependency than the previous layer.
 package dependencysolver
 
 // Entry is a struct containing information about a task, its ID and the dependency list
