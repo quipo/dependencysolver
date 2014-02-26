@@ -78,4 +78,4 @@ Other interesting articles on the topic:
 
 ## Copyright
 
-See LICENSE document
+See [LICENSE](LICENSE) document
