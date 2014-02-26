@@ -8,10 +8,10 @@ var augmenters []Entry
 
 func init() {
 	augmenters = make([]Entry, 0)
-	augmenters = append(augmenters, Entry{Id: "A"})
-	augmenters = append(augmenters, Entry{Id: "B", Deps: []string{"A"}})
-	augmenters = append(augmenters, Entry{Id: "C", Deps: []string{"A"}})
-	augmenters = append(augmenters, Entry{Id: "D", Deps: []string{"B", "C"}})
+	augmenters = append(augmenters, Entry{ID: "A"})
+	augmenters = append(augmenters, Entry{ID: "B", Deps: []string{"A"}})
+	augmenters = append(augmenters, Entry{ID: "C", Deps: []string{"A"}})
+	augmenters = append(augmenters, Entry{ID: "D", Deps: []string{"B", "C"}})
 }
 
 func TestHasCircularDependency(t *testing.T) {
