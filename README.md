@@ -1,5 +1,8 @@
 # Dependency Resolver (Golang)
 
+[![Build Status](https://travis-ci.org/quipo/dependencysolver.png?branch=master)](https://travis-ci.org/quipo/dependencysolver) 
+[![GoDoc](https://godoc.org/github.com/quipo/dependencysolver?status.png)](http://godoc.org/github.com/quipo/dependencysolver)
+
 ## Introduction
 
 Layer-based scheduling algorithm for parallel tasks with dependencies.
