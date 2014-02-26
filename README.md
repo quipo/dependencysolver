@@ -6,8 +6,9 @@
 ## Introduction
 
 Layer-based scheduling algorithm for parallel tasks with dependencies.
+Determines which tasks can be executed in parallel, by evaluating dependencies.
 
-Given a list of entries (each with its own dependency list), it can sort the entries in layers of execution, 
+Given a list of entries (each with its own dependency list), it can sort them in layers of execution, 
 where all entries in the same layer can be executed in parallel, and have no other dependency than the previous layer.
 
 For instance, given entries A, B, C, D, where B and C depend on A, and D depends on B and C, this function will return three layers of execution (as B and C can be executed in parallel after A completes):
