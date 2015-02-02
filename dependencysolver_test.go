@@ -5,24 +5,24 @@ import (
 	"testing"
 )
 
-var augmenters []Entry
+var entries []Entry
 
 func init() {
-	augmenters = make([]Entry, 0)
-	augmenters = append(augmenters, Entry{ID: "A"})
-	augmenters = append(augmenters, Entry{ID: "B", Deps: []string{"A"}})
-	augmenters = append(augmenters, Entry{ID: "C", Deps: []string{"A"}})
-	augmenters = append(augmenters, Entry{ID: "D", Deps: []string{"B", "C"}})
+	entries = make([]Entry, 0)
+	entries = append(entries, Entry{ID: "A"})
+	entries = append(entries, Entry{ID: "B", Deps: []string{"A"}})
+	entries = append(entries, Entry{ID: "C", Deps: []string{"A"}})
+	entries = append(entries, Entry{ID: "D", Deps: []string{"B", "C"}})
 }
 
 func TestHasCircularDependency(t *testing.T) {
-	if true == HasCircularDependency(augmenters) {
+	if true == HasCircularDependency(entries) {
 		t.Error("Should not have circular dependencies")
 	}
 }
 
 func TestLayeredTopologicalSort(t *testing.T) {
-	actual := LayeredTopologicalSort(augmenters)
+	actual := LayeredTopologicalSort(entries)
 	if nil == actual {
 		t.Error("Failed calculating dependency tree")
 	}
@@ -37,6 +37,24 @@ func TestLayeredTopologicalSort(t *testing.T) {
 	}
 	if !equalSlices(actual[2], []string{"D"}) {
 		t.Errorf("Expecting [D] at the 3rd layer, actual: %v", actual[2])
+	}
+}
+
+func TestLayeredTopologicalSortNoDeps(t *testing.T) {
+	var entries []Entry
+	entries = append(entries, Entry{ID: "A"})
+	entries = append(entries, Entry{ID: "B"})
+	entries = append(entries, Entry{ID: "C"})
+
+	actual := LayeredTopologicalSort(entries)
+	if nil == actual {
+		t.Error("Failed calculating dependency tree")
+	}
+	if len(actual) != 1 {
+		t.Errorf("Should have had 1 layer, %d found.", len(actual))
+	}
+	if !equalSlices(actual[0], []string{"A", "B", "C"}) {
+		t.Errorf("Expecting [A,B,C] at the 1st layer, actual: %v", actual[0])
 	}
 }
 
@@ -56,8 +74,8 @@ func equalSlices(a []string, b []string) bool {
 
 // last test, add a circular dependency from D to A
 func TestHasCircularDependency2(t *testing.T) {
-	augmenters[0].Deps = []string{"D"}
-	if false == HasCircularDependency(augmenters) {
+	entries[0].Deps = []string{"D"}
+	if false == HasCircularDependency(entries) {
 		t.Error("Should have circular dependencies")
 	}
 }

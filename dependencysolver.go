@@ -1,4 +1,5 @@
-// Layer-based scheduling algorithm for parallel tasks with dependencies.
+// Package dependencysolver implements a layer-based scheduling algorithm
+// for parallel tasks with dependencies.
 //
 // Given a list of entries (each with its own dependency list),
 // it can sort the entries in layers of execution,
@@ -35,7 +36,7 @@ func LayeredTopologicalSort(entries []Entry) (layers [][]string) {
 	}
 
 	for len(dependenciesToFrom) > 0 {
-		thisIterationIds := make([]string, 0)
+		var thisIterationIds []string
 		for k, v := range dependenciesToFrom {
 			if 0 == len(v) {
 				// if an item has zero dependencies, remove it
@@ -47,7 +48,7 @@ func LayeredTopologicalSort(entries []Entry) (layers [][]string) {
 			return nil
 		}
 
-		layer := make([]string, 0)
+		var layer []string
 		for _, id := range thisIterationIds {
 			// Remove the found items from the dictionary
 			delete(dependenciesToFrom, id)
